@@ -85,10 +85,6 @@ const App = () => {
     setProgress((validFields.length / formFields.length) * 100);
   };
 
-  // Form submission handler
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   let errors = {};
 
   //   Validate required fields and data types
   const handleSubmit = (e) => {
