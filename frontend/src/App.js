@@ -86,33 +86,38 @@ const App = () => {
   };
 
   // Form submission handler
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   let errors = {};
+
+  //   Validate required fields and data types
   const handleSubmit = (e) => {
-    e.preventDefault();
-    let errors = {};
+  e.preventDefault();
+  let errors = {};
 
-    Validate required fields and data types
-    formFields.forEach((field) => {
-      if (field.required && !formData[field.name]) {
-        errors[field.name] = `${field.label} is required`;
-      } else if (field.type === 'number' && isNaN(formData[field.name])) {
-        errors[field.name] = `${field.label} must be a valid number`;
-      } else if (field.type === 'text' && formData[field.name].trim() === '') 
-      {
-        errors[field.name] = `${field.label} cannot be empty`;
-      }
-    });
-
-    // Set errors and check if form is valid
-    if (Object.keys(errors).length > 0) {
-      setFormErrors(errors); // Display errors
-      setMessage('Please fill in all required fields correctly.'); // Global error message
-    } else {
-      setFormErrors({}); // Clear previous errors
-      setSubmittedData((prevData) => [...prevData, formData]); // Submit data
-      setFormType(''); // Reset form type
-      setMessage('Form submitted successfully!'); // Success message
+  // Validate required fields and data types
+  formFields.forEach((field) => {
+    if (field.required && !formData[field.name]) {
+      errors[field.name] = `${field.label} is required`;
+    } else if (field.type === 'number' && isNaN(formData[field.name])) {
+      errors[field.name] = `${field.label} must be a valid number`;
+    } else if (field.type === 'text' && formData[field.name]?.trim() === '') {
+      errors[field.name] = `${field.label} cannot be empty`;
     }
-  };
+  });
+
+  // Set errors and check if form is valid
+  if (Object.keys(errors).length > 0) {
+    setFormErrors(errors); // Display errors
+    setMessage('Please fill in all required fields correctly.'); // Global error message
+  } else {
+    setFormErrors({}); // Clear previous errors
+    setSubmittedData((prevData) => [...prevData, formData]); // Submit data
+    setFormData({}); // Clear form fields
+    setFormType(''); // Reset form type dropdown
+    setMessage('Form submitted successfully!'); // Success message
+  }
+};
 
   // Delete a row from the submitted data table
   const handleDelete = (index) => {
