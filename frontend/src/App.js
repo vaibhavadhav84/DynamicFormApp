@@ -231,7 +231,7 @@ const App = () => {
         )}
       </main>
       <footer>
-        <p>&copy; 2024 Dynamic Form App</p>
+        <p>&copy; 2024 Dynamic Form App </p>
       </footer>
     </div>
   );
