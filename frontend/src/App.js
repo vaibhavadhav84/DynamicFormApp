@@ -162,7 +162,7 @@ const App = () => {
                       name={field.name}
                       value={formData[field.name] || ''}
                       onChange={(e) => handleInputChange(e, field)}
-                      required={field.required}
+                     
                     >
                       <option value="">-- Select --</option>
                       {field.options.map((option) => (
