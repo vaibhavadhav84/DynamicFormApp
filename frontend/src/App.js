@@ -91,16 +91,16 @@ const App = () => {
     let errors = {};
 
     // Validate required fields and data types
-    formFields.forEach((field) => {
-      if (field.required && !formData[field.name]) {
-        errors[field.name] = `${field.label} is required`;
-      } else if (field.type === 'number' && isNaN(formData[field.name])) {
-        errors[field.name] = `${field.label} must be a valid number`;
-      } else if (field.type === 'text' && formData[field.name].trim() === '') 
-      // {
-      //   errors[field.name] = `${field.label} cannot be empty`;
-      // }
-    });
+    // formFields.forEach((field) => {
+    //   if (field.required && !formData[field.name]) {
+    //     errors[field.name] = `${field.label} is required`;
+    //   } else if (field.type === 'number' && isNaN(formData[field.name])) {
+    //     errors[field.name] = `${field.label} must be a valid number`;
+    //   } else if (field.type === 'text' && formData[field.name].trim() === '') 
+    //   // {
+    //   //   errors[field.name] = `${field.label} cannot be empty`;
+    //   // }
+    // });
 
     // Set errors and check if form is valid
     if (Object.keys(errors).length > 0) {
