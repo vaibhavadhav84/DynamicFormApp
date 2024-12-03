@@ -60,16 +60,16 @@ const App = () => {
     }
   }, [formType, apiResponses]);
 
-  // Handler for form field changes
+  // // Handler for form field changes
   const handleInputChange = (e, field) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({ ...prevData, [name]: value })); // Update form data
-
+  
     // Validate field dynamically as the user types
     let errors = { ...formErrors };
     if (field.required && !value) {
       errors[name] = `${field.label} is required`;
-    } else if (field.type === 'number' && isNaN(value)) {
+    } else if (field.type === 'number' && value && isNaN(value)) {
       errors[name] = `${field.label} must be a valid number`;
     } else if (field.type === 'text' && value.trim() === '') {
       errors[name] = `${field.label} cannot be empty`;
@@ -77,17 +77,17 @@ const App = () => {
       delete errors[name]; // Remove error when the field is valid
     }
     setFormErrors(errors);
-
+  
     // Calculate progress based on valid fields
     const validFields = formFields.filter(
-      (field) => formData[field.name] && !formErrors[field.name]
+      (field) =>
+        formData[field.name] && !formErrors[field.name] && field.required
     );
-    setProgress((validFields.length / formFields.length) * 100);
+    setProgress((validFields.length / formFields.filter((f) => f.required).length) * 100);
   };
 
-
-  //   Validate required fields and data types
-  const handleSubmit = (e) => {
+//   Validate required fields and data types
+const handleSubmit = (e) => {
   e.preventDefault();
   let errors = {};
 
@@ -95,7 +95,7 @@ const App = () => {
   formFields.forEach((field) => {
     if (field.required && !formData[field.name]) {
       errors[field.name] = `${field.label} is required`;
-    } else if (field.type === 'number' && isNaN(formData[field.name])) {
+    } else if (field.type === 'number' && formData[field.name] && isNaN(formData[field.name])) {
       errors[field.name] = `${field.label} must be a valid number`;
     } else if (field.type === 'text' && formData[field.name]?.trim() === '') {
       errors[field.name] = `${field.label} cannot be empty`;
