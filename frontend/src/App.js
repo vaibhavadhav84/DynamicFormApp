@@ -179,9 +179,28 @@ const App = () => {
                       name={field.name}
                       value={formData[field.name] || ''}
                       onChange={(e) => handleInputChange(e, field)}
-                      required={field.required}
-                    />
-                  )}
+                      onKeyDown={(e) => {
+          // Allow only numbers for cardNumber and CVV
+          if (
+            (field.name === 'cardNumber' || field.name === 'cvv') &&
+            !/[0-9]/.test(e.key) &&
+            e.key !== 'Backspace'
+          ) {
+            e.preventDefault();
+          }
+        }}
+        onInput={(e) => {
+          // Allow only alphabets for cardholderName
+          if (field.name === 'cardholderName') {
+            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, '');
+          }
+        }}
+        required={field.required}
+      />
+    )}
+                  //     required={field.required}
+                  //   />
+                  // )}
 
                   {/* Display error message if any */}
                   {formErrors[field.name] && (
