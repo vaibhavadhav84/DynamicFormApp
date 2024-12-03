@@ -198,9 +198,6 @@ const App = () => {
         required={field.required}
       />
     )}
-                  //     required={field.required}
-                  //   />
-                  // )}
 
                   {/* Display error message if any */}
                   {formErrors[field.name] && (
